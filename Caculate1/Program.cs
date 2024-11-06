@@ -1,5 +1,15 @@
-﻿using System;
-using Caculate1;
+﻿using ConsoleCalculator.Calculator;
+using ConsoleCalculator.Parser;
 
-Console.WriteLine(Add.Sum("1+1"));
+var expression = Console.ReadLine();
 
+if (expression == null)
+{
+    Console.WriteLine("Invalid expression");
+    return;
+}
+
+NaiveParser parser = new();
+NaiveCalculator calculator = new(parser);
+
+Console.WriteLine(calculator.Calculate(expression));
