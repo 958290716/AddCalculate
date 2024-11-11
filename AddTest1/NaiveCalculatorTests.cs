@@ -5,7 +5,7 @@ namespace ConsoleCalculator.Tests
 {
     public class NaiveCalculatorTests
     {
-        private NaiveCalculator GetNaiveCalculator() => new(new NaiveParser());
+        private static NaiveCalculator GetNaiveCalculator() => new(new NaiveParserPlus());
 
         [Theory]
         [InlineData("1+1", 2)]
@@ -29,7 +29,6 @@ namespace ConsoleCalculator.Tests
 
             //Assert
             Assert.Equal(expected, actual);
-
         }
 
         [Theory]
@@ -53,6 +52,7 @@ namespace ConsoleCalculator.Tests
 
         [Theory]
         [InlineData("1")]
+        [InlineData("+1")]
         [InlineData("1+1-")]
         [InlineData("-1-")]
         [InlineData("1---1")]
@@ -62,7 +62,7 @@ namespace ConsoleCalculator.Tests
         public void Calculate_WhenHasInvalidInput_ShouldThrowException(string expression)
         {
             var calculator = GetNaiveCalculator();
-            Assert.Throws<ArgumentException>(()=> calculator.Calculate(expression));
+            Assert.Throws<ArgumentException>(() => calculator.Calculate(expression));
             /// Should throws <see cref="ArgumentException"/>
         }
     }
